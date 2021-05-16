@@ -6,7 +6,9 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.exwara.jobflex.R
+import com.exwara.jobflex.ui.account.AccountActivity
 import com.exwara.jobflex.utils.AppUtils
+import com.exwara.jobflex.utils.Preferences
 
 class SplashActivity : AppCompatActivity() {
 
@@ -21,7 +23,12 @@ class SplashActivity : AppCompatActivity() {
         val motionLayout: MotionLayout = findViewById(R.id.motionLayout)
         motionLayout.setTransitionListener(object : MotionLayout.TransitionListener {
             override fun onTransitionCompleted(p0: MotionLayout?, p1: Int) {
-                startActivity(Intent(activity, MainActivity::class.java))
+                if (Preferences().hasUserLoggedIn(activity)) {
+                    startActivity(Intent(activity, MainActivity::class.java))
+                } else {
+                    Preferences().deletePref(activity)
+                    startActivity(Intent(activity, AccountActivity::class.java))
+                }
             }
 
             override fun onTransitionChange(p0: MotionLayout?, p1: Int, p2: Int, p3: Float) {}

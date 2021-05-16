@@ -9,9 +9,11 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JobFlex">
-        <activity android:name="com.exwara.jobflex.ui.main.MainActivity" />
+        <activity android:name=".ui.account.AccountActivity"
+            android:noHistory="true" />
+        <activity android:name=".ui.main.MainActivity" />
         <activity
-            android:name="com.exwara.jobflex.ui.main.SplashActivity"
+            android:name=".ui.main.SplashActivity"
             android:noHistory="true"
             android:theme="@style/Theme.JobFlex.Splash">
             <intent-filter>
