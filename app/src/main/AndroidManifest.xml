@@ -9,12 +9,18 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.JobFlex">
+<<<<<<< HEAD
         <activity android:name=".ui.detail.DetailActivity"></activity>
+=======
+        <activity android:name=".ui.profile.ProfileActivity" />
+        <activity android:name=".ui.detail.DetailActivity" />
+>>>>>>> master
         <activity
             android:name=".ui.account.AccountActivity"
             android:noHistory="true" />
-        <activity android:name=".ui.main.MainActivity"
-            android:theme="@style/Theme.JobFlex.NoActionBar"/>
+        <activity
+            android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.JobFlex.NoActionBar" />
         <activity
             android:name=".ui.main.SplashActivity"
             android:noHistory="true"
