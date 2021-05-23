@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.core.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="1000dp"
+    android:foregroundTint="#00BCD4"
+    tools:context=".ui.account.AccountActivity">
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="1000dp">
+
+        <de.hdodenhof.circleimageview.CircleImageView
+            android:id="@+id/imgProfile"
+            android:layout_width="160dp"
+            android:layout_height="160dp"
+            android:layout_marginTop="24dp"
+            android:src="@color/grey_200"
+            app:civ_border_width="1dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/textView2"
+            android:layout_width="wrap_content"
+            android:layout_height="20dp"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="24dp"
+            android:fontFamily="@font/roboto"
+            android:text="@string/lorem_ipsum"
+            android:textColor="@color/black"
+            android:textSize="15sp"
+            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
+
+        <TextView
+            android:id="@+id/view"
+            android:layout_width="match_parent"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_border"
+            android:clickable="true"
+            android:focusable="true"
+            android:layout_gravity="center_vertical"
+            android:gravity="center_vertical"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/black"
+            android:text="@string/lorem_ipsum"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/textView2" />
+
+        <TextView
+            android:id="@+id/view2"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:text="@string/lorem_ipsum"
+            android:fontFamily="@font/roboto"
+            android:textColor="@color/black"
+            android:gravity="center_vertical"
+            android:background="@drawable/bg_border"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view" />
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_logout"
+            android:layout_width="180dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:layout_marginTop="32dp"
+            android:background="@drawable/bg_button"
+            android:text="@string/label_logout"
+            android:textColor="@color/white"
+            android:textSize="18sp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+
+            app:layout_constraintHorizontal_bias="0.497"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/view2" />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</androidx.core.widget.NestedScrollView>
