@@ -11,7 +11,8 @@
         android:theme="@style/Theme.JobFlex">
         <activity android:name=".ui.account.AccountActivity"
             android:noHistory="true" />
-        <activity android:name=".ui.main.MainActivity" />
+        <activity android:name=".ui.main.MainActivity"
+            android:theme="@style/Theme.JobFlex.NoActionBar"/>
         <activity
             android:name=".ui.main.SplashActivity"
             android:noHistory="true"
