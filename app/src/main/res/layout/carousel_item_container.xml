@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/img_carousel"
+        android:layout_width="match_parent"
+        android:layout_height="200dp"
+        tools:ignore="ContentDescription"
+        tools:src="@color/grey_200" />
+
+    <TextView
+        android:id="@+id/tv_description"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/img_carousel"
+        android:gravity="center"
+        tools:text="Description" />
+
+</RelativeLayout>

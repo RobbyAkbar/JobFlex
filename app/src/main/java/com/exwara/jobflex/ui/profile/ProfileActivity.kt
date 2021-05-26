@@ -13,7 +13,6 @@ import okhttp3.RequestBody
 import okhttp3.ResponseBody
 import java.io.File
 
-
 class ProfileActivity : AppCompatActivity() {
 
     private lateinit var binding: ActivityProfileBinding
@@ -51,7 +50,7 @@ class ProfileActivity : AppCompatActivity() {
         }
     }
 
-    private fun uploadFile(fileUri: Uri) {
+    /*private fun uploadFile(fileUri: Uri) {
         // create upload service client
         val service: FileUploadService =
             ServiceGenerator.createService(FileUploadService::class.java)
@@ -67,7 +66,7 @@ class ProfileActivity : AppCompatActivity() {
         )
 
         // MultipartBody.Part is used to send also the actual file name
-        val body: Part = createFormData.createFormData("picture", file.getName(), requestFile)
+        val body: Part = createFormData.createFormData("picture", file.name, requestFile)
 
         // add another part within the multipart request
         val descriptionString = "hello, this is description speaking"
@@ -76,5 +75,5 @@ class ProfileActivity : AppCompatActivity() {
         )
 
         // finally, execute the request
-    }
+    }*/
 }

@@ -1,11 +1,13 @@
 package com.exwara.jobflex.ui.main
 
+import android.content.Intent
 import android.os.Bundle
 import android.view.Menu
 import android.view.MenuItem
 import androidx.appcompat.app.AppCompatActivity
 import com.exwara.jobflex.R
 import com.exwara.jobflex.databinding.ActivityMainBinding
+import com.exwara.jobflex.ui.profile.ProfileActivity
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,7 +29,7 @@ class MainActivity : AppCompatActivity() {
 
     override fun onOptionsItemSelected(item: MenuItem): Boolean {
         if (item.itemId == R.id.action_profile) {
-            onBackPressed()
+            startActivity(Intent(this, ProfileActivity::class.java))
         }
         return super.onOptionsItemSelected(item)
     }
