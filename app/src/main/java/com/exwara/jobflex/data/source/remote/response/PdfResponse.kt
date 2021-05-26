@@ -1,4 +1,4 @@
-package com.exwara.jobflex.core.data.source.remote.response
+package com.exwara.jobflex.data.source.remote.response
 
 import com.google.gson.annotations.SerializedName
 
