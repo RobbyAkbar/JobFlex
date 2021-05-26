@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "750209431363",
+    "project_id": "b21-cap0139-jobflex",
+    "storage_bucket": "b21-cap0139-jobflex.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:750209431363:android:7899f8e6ef3f2edc1da1f6",
+        "android_client_info": {
+          "package_name": "com.exwara.jobflex"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "750209431363-6pvd1notvsctuavqjbt6spn906hhhqb7.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAzWzLAnIn8GSr9dzaqasqw3wFhQntYd9k"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "750209431363-6pvd1notvsctuavqjbt6spn906hhhqb7.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
