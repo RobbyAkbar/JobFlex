@@ -8,15 +8,87 @@ import com.exwara.jobflex.ui.home.SliderItem
  */
 object DataDummy {
 
-    fun generateDummyJobs(): List<JobEntity> {
+    fun generateDummyJobs(): ArrayList<JobEntity> {
         val jobs = ArrayList<JobEntity>()
         jobs.add(
             JobEntity(
                 1,
                 "Security Engineer/Technical Lead",
-                "security",
-                "icon.png",
+                "Conveniently evisculate ubiquitous growth strategies after multifunctional total linkage. Uniquely deploy progressive.",
                 "skill",
+                listOf("Full Time", "Min. 1 Year", "Mid Level"),
+                "washington",
+                "2020",
+                "2021"
+            )
+        )
+        jobs.add(
+            JobEntity(
+                1,
+                "Security Engineer/Technical Lead",
+                "Conveniently evisculate ubiquitous growth strategies after multifunctional total linkage. Uniquely deploy progressive.",
+                "skill",
+                listOf("Full Time", "Min. 1 Year", "Mid Level"),
+                "washington",
+                "2020",
+                "2021"
+            )
+        )
+        jobs.add(
+            JobEntity(
+                1,
+                "Security Engineer/Technical Lead",
+                "Conveniently evisculate ubiquitous growth strategies after multifunctional total linkage. Uniquely deploy progressive.",
+                "skill",
+                listOf("Full Time", "Min. 1 Year", "Mid Level"),
+                "washington",
+                "2020",
+                "2021"
+            )
+        )
+        jobs.add(
+            JobEntity(
+                1,
+                "Security Engineer/Technical Lead",
+                "Conveniently evisculate ubiquitous growth strategies after multifunctional total linkage. Uniquely deploy progressive.",
+                "skill",
+                listOf("Full Time", "Min. 1 Year", "Mid Level"),
+                "washington",
+                "2020",
+                "2021"
+            )
+        )
+        jobs.add(
+            JobEntity(
+                1,
+                "Security Engineer/Technical Lead",
+                "Conveniently evisculate ubiquitous growth strategies after multifunctional total linkage. Uniquely deploy progressive.",
+                "skill",
+                listOf("Full Time", "Min. 1 Year", "Mid Level"),
+                "washington",
+                "2020",
+                "2021"
+            )
+        )
+        jobs.add(
+            JobEntity(
+                1,
+                "Security Engineer/Technical Lead",
+                "Conveniently evisculate ubiquitous growth strategies after multifunctional total linkage. Uniquely deploy progressive.",
+                "skill",
+                listOf("Full Time", "Min. 1 Year", "Mid Level"),
+                "washington",
+                "2020",
+                "2021"
+            )
+        )
+        jobs.add(
+            JobEntity(
+                1,
+                "Security Engineer/Technical Lead",
+                "Conveniently evisculate ubiquitous growth strategies after multifunctional total linkage. Uniquely deploy progressive.",
+                "skill",
+                listOf("Full Time", "Min. 1 Year", "Mid Level"),
                 "washington",
                 "2020",
                 "2021"

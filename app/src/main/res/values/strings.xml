@@ -23,4 +23,5 @@
     <string name="hint_sort_by">Sort by</string>
     <string name="tv_filter">Filter</string>
     <string name="lorem_ipsum">Lorem Ipsum</string>
+    <string name="txt_show_more">Show more…</string>
 </resources>

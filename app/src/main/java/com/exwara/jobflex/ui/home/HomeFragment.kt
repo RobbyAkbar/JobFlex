@@ -7,6 +7,7 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.fragment.app.Fragment
+import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
@@ -21,6 +22,8 @@ class HomeFragment : Fragment() {
     private val binding get() = _binding
 
     private lateinit var sliderAdapter: SliderAdapter
+    private lateinit var jobAdapter: JobAdapter
+
     private val sliderHandler = Handler(Looper.getMainLooper())
 
     override fun onCreateView(
@@ -36,6 +39,9 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
+            sliderAdapter = SliderAdapter()
+            jobAdapter = JobAdapter()
+
             val compositePageTransformer = CompositePageTransformer()
             compositePageTransformer.addTransformer(MarginPageTransformer(40))
             compositePageTransformer.addTransformer { page, position ->
@@ -45,7 +51,6 @@ class HomeFragment : Fragment() {
 
             binding?.apply {
                 with(vpCarousel){
-                    sliderAdapter = SliderAdapter()
                     adapter = sliderAdapter
                     offscreenPageLimit = 3
                     getChildAt(0).overScrollMode = RecyclerView.OVER_SCROLL_NEVER
@@ -58,9 +63,15 @@ class HomeFragment : Fragment() {
                         }
                     })
                 }
+                with(rvJob) {
+                    layoutManager = LinearLayoutManager(context)
+                    setHasFixedSize(true)
+                    adapter = jobAdapter
+                }
             }
 
             sliderAdapter.listItems = DataDummy.generateDummySlider()
+            jobAdapter.updateWith(DataDummy.generateDummyJobs(), 3)
         }
     }
 
