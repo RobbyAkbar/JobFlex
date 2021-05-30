@@ -4,7 +4,7 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
-import com.exwara.jobflex.data.source.local.entity.JobEntity
+import com.exwara.jobflex.core.data.source.local.entity.JobEntity
 import com.exwara.jobflex.databinding.ItemRowJobBinding
 import java.util.*
 import kotlin.math.min

@@ -7,8 +7,8 @@ import androidx.appcompat.app.AppCompatDelegate
 import androidx.constraintlayout.motion.widget.MotionLayout
 import com.exwara.jobflex.R
 import com.exwara.jobflex.ui.account.AccountActivity
-import com.exwara.jobflex.utils.AppUtils
-import com.exwara.jobflex.utils.Preferences
+import com.exwara.jobflex.core.utils.AppUtils
+import com.exwara.jobflex.core.utils.Preferences
 
 class SplashActivity : AppCompatActivity() {
 

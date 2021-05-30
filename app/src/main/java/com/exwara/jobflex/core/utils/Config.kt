@@ -1,4 +1,4 @@
-package com.exwara.jobflex.utils
+package com.exwara.jobflex.core.utils
 
 /**
  * Created by robby on 16/05/21.

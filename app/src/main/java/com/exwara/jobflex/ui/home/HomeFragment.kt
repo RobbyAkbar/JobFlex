@@ -13,7 +13,7 @@ import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
 import com.exwara.jobflex.databinding.FragmentHomeBinding
-import com.exwara.jobflex.utils.DataDummy
+import com.exwara.jobflex.core.utils.DataDummy
 import kotlin.math.abs
 
 class HomeFragment : Fragment() {

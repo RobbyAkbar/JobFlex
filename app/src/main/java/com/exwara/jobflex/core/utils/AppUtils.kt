@@ -1,4 +1,4 @@
-package com.exwara.jobflex.utils
+package com.exwara.jobflex.core.utils
 
 import android.app.Activity
 import android.os.Build

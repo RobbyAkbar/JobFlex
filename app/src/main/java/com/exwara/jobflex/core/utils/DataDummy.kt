@@ -1,6 +1,6 @@
-package com.exwara.jobflex.utils
+package com.exwara.jobflex.core.utils
 
-import com.exwara.jobflex.data.source.local.entity.JobEntity
+import com.exwara.jobflex.core.data.source.local.entity.JobEntity
 import com.exwara.jobflex.ui.home.SliderItem
 
 /**

@@ -1,4 +1,4 @@
-package com.exwara.jobflex.data.source.local.entity
+package com.exwara.jobflex.core.data.source.local.entity
 
 /**
  * Created by robby on 27/05/21.

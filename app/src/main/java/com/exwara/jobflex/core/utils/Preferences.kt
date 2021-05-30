@@ -1,4 +1,4 @@
-package com.exwara.jobflex.utils
+package com.exwara.jobflex.core.utils
 
 import android.content.Context
 import android.content.SharedPreferences
