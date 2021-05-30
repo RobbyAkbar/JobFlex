@@ -1,4 +1,4 @@
-package com.dicoding.tourismapp.core.utils
+package com.exwara.jobflex.core.utils
 
 import android.os.Handler
 import android.os.Looper

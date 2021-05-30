@@ -1,6 +1,6 @@
 package com.exwara.jobflex.data.source.remote.network
 
-import com.exwara.jobflex.data.source.remote.response.PdfResponse
+import com.exwara.jobflex.core.data.source.remote.response.PdfResponse
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import retrofit2.Call

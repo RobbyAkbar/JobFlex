@@ -1,4 +1,4 @@
-package com.exwara.jobflex.data.source.remote.network
+package com.exwara.jobflex.core.data.source.remote.network
 
 import okhttp3.OkHttpClient
 import okhttp3.logging.HttpLoggingInterceptor

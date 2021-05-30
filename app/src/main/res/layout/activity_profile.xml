@@ -29,16 +29,16 @@
             android:layout_gravity="center_vertical"
             android:layout_marginTop="24dp"
             android:fontFamily="@font/roboto"
-            android:text="@string/lorem_ipsum"
+            android:text="@string/your_name"
             android:textColor="@color/black"
             android:textSize="15sp"
-            app:layout_constraintEnd_toEndOf="@+id/view"
+            app:layout_constraintEnd_toEndOf="@+id/tv_jobstatus"
             app:layout_constraintHorizontal_bias="0.498"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/imgProfile" />
 
         <TextView
-            android:id="@+id/view"
+            android:id="@+id/tv_jobstatus"
             android:layout_width="match_parent"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
@@ -49,7 +49,7 @@
             android:gravity="center_vertical"
             android:fontFamily="@font/roboto"
             android:textColor="@color/black"
-            android:text="@string/lorem_ipsum"
+            android:text="@string/job_application_status"
             android:paddingStart="15dp"
             android:paddingEnd="15dp"
             app:layout_constraintEnd_toEndOf="parent"
@@ -57,11 +57,11 @@
             app:layout_constraintTop_toBottomOf="@+id/textView2" />
 
         <TextView
-            android:id="@+id/view2"
+            android:id="@+id/tv_editprofile"
             android:layout_width="0dp"
             android:layout_height="45dp"
             android:layout_marginTop="16dp"
-            android:text="@string/lorem_ipsum"
+            android:text="@string/edit_profile"
             android:fontFamily="@font/roboto"
             android:textColor="@color/black"
             android:gravity="center_vertical"
@@ -70,7 +70,25 @@
             android:paddingEnd="15dp"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/tv_jobstatus" />
+
+        <TextView
+            android:id="@+id/tv_uploadcv"
+            android:layout_width="0dp"
+            android:layout_height="45dp"
+            android:layout_marginTop="16dp"
+            android:background="@drawable/bg_border"
+            android:fontFamily="@font/roboto"
+            android:gravity="center_vertical"
+            android:paddingStart="15dp"
+            android:paddingEnd="15dp"
+            android:clickable="true"
+            android:text="@string/upload_cv"
+            android:textColor="@color/black"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/tv_editprofile"
+            android:focusable="true" />
 
 
         <androidx.appcompat.widget.AppCompatButton
@@ -83,22 +101,13 @@
             android:text="@string/label_logout"
             android:textColor="@color/white"
             android:textSize="18sp"
-            app:layout_constraintBottom_toBottomOf="parent"
 
+            app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/btn_pdf"
+            app:layout_constraintTop_toBottomOf="@+id/tv_uploadcv"
             app:layout_constraintVertical_bias="0.0" />
-
-        <Button
-            android:id="@+id/btn_pdf"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="PDF"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view2" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

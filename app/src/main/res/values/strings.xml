@@ -24,4 +24,11 @@
     <string name="tv_filter">Filter</string>
     <string name="lorem_ipsum">Lorem Ipsum</string>
     <string name="txt_show_more">Show more…</string>
+    <string name="job_application_status">Job Application Status</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="upload_cv">Upload CV</string>
+    <string name="your_name">Your Name</string>
+    <string name="your_cv">Your CV</string>
+    <string name="pdf">.pdf</string>
+    <string name="upload">Upload</string>
 </resources>
