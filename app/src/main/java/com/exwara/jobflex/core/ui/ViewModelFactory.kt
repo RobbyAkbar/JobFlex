@@ -5,8 +5,10 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.dicoding.tourismapp.core.di.Injection
 import com.exwara.jobflex.core.domain.usecase.IJobUseCase
+import com.exwara.jobflex.ui.main.MainActivityViewModel
 import com.exwara.jobflex.ui.profile.ProfileViewModel
 import com.exwara.jobflex.ui.profile.UploadPdfViewModel
+import com.exwara.jobflex.ui.search.SearchViewModel
 
 class ViewModelFactory private constructor(private val jobUseCase: IJobUseCase) :
     ViewModelProvider.NewInstanceFactory() {
@@ -31,6 +33,12 @@ class ViewModelFactory private constructor(private val jobUseCase: IJobUseCase) 
             }
             modelClass.isAssignableFrom(UploadPdfViewModel::class.java) -> {
                 UploadPdfViewModel(jobUseCase) as T
+            }
+            modelClass.isAssignableFrom(SearchViewModel::class.java) -> {
+                SearchViewModel(jobUseCase) as T
+            }
+            modelClass.isAssignableFrom(MainActivityViewModel::class.java) -> {
+                MainActivityViewModel(jobUseCase) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }

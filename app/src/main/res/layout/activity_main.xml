@@ -15,25 +15,16 @@
         android:layout_height="?attr/actionBarSize"
         android:theme="@style/cusToolbarStyle" />
 
-    <com.google.android.material.textfield.TextInputLayout
-        android:id="@+id/tl_search"
-        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+    <SearchView
+        android:id="@+id/search_bar"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:background="@drawable/bg_border"
+        android:queryHint="@string/prompt_search"
+        android:clickable="true"
         android:layout_marginStart="@dimen/activity_horizontal_margin"
         android:layout_marginEnd="@dimen/activity_horizontal_margin"
-        android:layout_marginBottom="8dp"
-        android:hint="@string/prompt_search"
-        app:endIconMode="clear_text"
-        app:startIconDrawable="@drawable/ic_search">
-
-        <com.google.android.material.textfield.TextInputEditText
-            android:id="@+id/edt_search"
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:inputType="text" />
-
-    </com.google.android.material.textfield.TextInputLayout>
+        android:focusable="true" />
 
     <androidx.core.widget.NestedScrollView
         android:layout_width="match_parent"
