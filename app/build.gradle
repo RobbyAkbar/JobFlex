@@ -1,7 +1,7 @@
 plugins {
     id 'com.android.application'
     id 'kotlin-android'
-    id 'kotlin-parcelize'
+    id 'kotlin-kapt'
 }
 apply plugin: 'com.google.gms.google-services'
 
@@ -14,6 +14,7 @@ android {
         minSdkVersion 21
         targetSdkVersion 30
         versionCode 1
+        multiDexEnabled true
         versionName "1.0"
         multiDexEnabled true
         vectorDrawables.useSupportLibrary true
@@ -29,6 +30,7 @@ android {
 
     buildFeatures {
         viewBinding true
+        dataBinding true
     }
 
     compileOptions {
@@ -38,6 +40,7 @@ android {
     kotlinOptions {
         jvmTarget = '1.8'
     }
+
 }
 
 dependencies {
@@ -64,6 +67,14 @@ dependencies {
     implementation platform('com.google.firebase:firebase-bom:28.0.1')
     implementation 'com.google.firebase:firebase-analytics-ktx'
     implementation 'com.google.firebase:firebase-auth:21.0.1'
+    implementation 'com.google.firebase:firebase-firestore:23.0.0'
+
+    //multidex
+    implementation 'androidx.multidex:multidex:2.0.1'
+    //view model
+    implementation 'androidx.lifecycle:lifecycle-extensions:2.2.0'
+    //databinding
+    kapt 'androidx.databinding:databinding-compiler:4.2.1'
 
     testImplementation 'junit:junit:4.13.2'
     androidTestImplementation 'androidx.test.ext:junit:1.1.2'
