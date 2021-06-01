@@ -7,6 +7,7 @@ import com.exwara.jobflex.core.data.source.local.LocalDataSource
 import com.exwara.jobflex.core.data.source.remote.RemoteDataSource
 import com.exwara.jobflex.core.data.source.remote.network.ApiResponse
 import com.exwara.jobflex.core.domain.model.Pdf
+import com.exwara.jobflex.core.domain.model.SearchItem
 import com.exwara.jobflex.core.domain.repository.IJobRepository
 import com.exwara.jobflex.core.utils.AppExecutors
 import com.exwara.jobflex.core.utils.DataMapper
@@ -39,24 +40,28 @@ class JobRepository private constructor(
         fileName: String
     ): LiveData<Resource<Pdf>> {
         val result = MediatorLiveData<Resource<Pdf>>()
-//        appExecutors.diskIO().execute {
-//           val apiResponse =  remoteDataSource.uploadPDF(file, name, fileName)
-//            result.addSource(apiResponse) { response ->
-//                when (response) {
-//                    is ApiResponse.Success ->
-//                        result.value = Resource.Success(DataMapper.mapPdfResponsesToPdfDomain(response.data))
-//                    is ApiResponse.Error -> {
-//                        result.value = Resource.Error(response.errorMessage, null)
-//                    }
-//                }
-//            }
-//        }
         val apiResponse =  remoteDataSource.uploadPDF(file, name, fileName)
         result.value = Resource.Loading(null)
         result.addSource(apiResponse) { response ->
             when (response) {
                 is ApiResponse.Success ->
                     result.value = Resource.Success(DataMapper.mapPdfResponsesToPdfDomain(response.data))
+                is ApiResponse.Error -> {
+                    result.value = Resource.Error(response.errorMessage, null)
+                }
+            }
+        }
+        return result
+    }
+
+    override fun searchJob(toSearch: RequestBody): LiveData<Resource<List<SearchItem>>> {
+        val result = MediatorLiveData<Resource<List<SearchItem>>>()
+        val apiResponse = remoteDataSource.searchJob(toSearch)
+        result.value = Resource.Loading(null)
+        result.addSource(apiResponse) { response ->
+            when (response) {
+                is ApiResponse.Success ->
+                    result.value = Resource.Success(DataMapper.mapSearchResponsesToSearchDomain(response.data))
                 is ApiResponse.Error -> {
                     result.value = Resource.Error(response.errorMessage, null)
                 }
