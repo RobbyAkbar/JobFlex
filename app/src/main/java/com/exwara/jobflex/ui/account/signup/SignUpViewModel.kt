@@ -1,7 +1,6 @@
 package com.exwara.jobflex.ui.account.signup
 
 import android.app.Application
-import android.util.Log
 import android.util.Patterns
 import androidx.lifecycle.AndroidViewModel
 import androidx.lifecycle.LiveData
@@ -101,6 +100,7 @@ class SignUpViewModel(private val myApplication: Application) : AndroidViewModel
                 userEntity.userID = user.uid
                 userEntity.email = items["email"].toString()
                 userEntity.fullName = items["fullName"].toString()
+                userEntity.phoneNumber = items["phoneNumber"].toString()
                 userEntity.profile_pic = items["profilePictureURL"].toString()
                 userEntity.active = true
                 MyApplication.currentUser = userEntity

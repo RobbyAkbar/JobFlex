@@ -1,13 +1,13 @@
 package com.exwara.jobflex.core.utils
 
 import com.exwara.jobflex.core.data.source.remote.response.PdfResponse
-import com.exwara.jobflex.core.data.source.remote.response.SearchResponseItem
-import com.exwara.jobflex.core.domain.model.Pdf
+import com.exwara.jobflex.core.data.source.remote.response.SearchResponse
+import com.exwara.jobflex.core.domain.model.PdfItem
 import com.exwara.jobflex.core.domain.model.SearchItem
 
 object DataMapper {
-    fun mapPdfResponsesToPdfDomain(input: PdfResponse): Pdf {
-        return Pdf(
+    fun mapPdfResponsesToPdfDomain(input: PdfResponse): PdfItem {
+        return PdfItem(
             input.generation,
             input.metageneration,
             input.kind,
@@ -28,7 +28,7 @@ object DataMapper {
         )
     }
 
-    fun mapSearchResponsesToSearchDomain(input: List<SearchResponseItem> ): List<SearchItem> {
+    fun mapSearchResponsesToSearchDomain(input: List<SearchResponse> ): List<SearchItem> {
         val dataList = ArrayList<SearchItem>()
         input.map {
             val list = SearchItem(

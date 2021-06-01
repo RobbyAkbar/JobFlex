@@ -11,6 +11,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:clipChildren="false"
+        android:layout_marginBottom="@dimen/activity_vertical_margin"
         android:clipToPadding="false"
         android:paddingStart="80dp"
         android:paddingEnd="80dp" />
@@ -18,11 +19,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_margin="@dimen/activity_horizontal_margin"
+        android:layout_marginStart="@dimen/activity_horizontal_margin"
+        android:layout_marginEnd="@dimen/activity_horizontal_margin"
         android:text="@string/tv_job_offer"
         android:textAllCaps="true"
         android:textSize="18sp"
         android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/progressBar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:visibility="gone"
+        tools:visibility="visible"
+        android:indeterminateDrawable="@drawable/progress" />
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rv_job"
@@ -32,6 +43,7 @@
         tools:listitem="@layout/item_row_job" />
 
     <TextView
+        android:id="@+id/tv_show_more"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="end"
@@ -40,6 +52,8 @@
         android:background="?attr/selectableItemBackgroundBorderless"
         android:clickable="true"
         android:focusable="true"
+        android:visibility="gone"
+        tools:visibility="visible"
         android:text="@string/txt_show_more" />
 
 </LinearLayout>

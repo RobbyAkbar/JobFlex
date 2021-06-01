@@ -1,10 +1,15 @@
 package com.exwara.jobflex.core.utils
 
 import android.app.Activity
+import android.content.Context
 import android.os.Build
 import android.view.View
 import android.view.WindowInsets
 import android.view.WindowInsetsController
+import androidx.appcompat.app.AlertDialog
+import com.exwara.jobflex.R
+import java.text.SimpleDateFormat
+import java.util.*
 
 /**
  * Created by robby on 16/05/21.
@@ -30,6 +35,29 @@ class AppUtils {
                         or View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN // Hide the nav bar and status bar
                         or View.SYSTEM_UI_FLAG_HIDE_NAVIGATION
                         or View.SYSTEM_UI_FLAG_FULLSCREEN)
+        }
+    }
+
+    fun formatDate(dateString: String): String {
+        val fmt = SimpleDateFormat("yyyy-MM-dd HH:mm:ss", Locale("en", "US"))
+        val newFmt = SimpleDateFormat("MMM dd, yyyy", Locale("en", "US"))
+        val date: Date = fmt.parse(dateString) ?: Date()
+        return newFmt.format(date)
+    }
+
+    companion object {
+        private lateinit var builder: AlertDialog.Builder
+        private lateinit var dialog: AlertDialog
+
+        fun sendSampleDialog(context: Context, message: String) {
+            builder = AlertDialog.Builder(context)
+            builder.setMessage(message)
+                .setCancelable(false)
+                .setPositiveButton(R.string.ok) { _, _ ->
+                    dialog.dismiss()
+                }
+            dialog = builder.create()
+            dialog.show()
         }
     }
 

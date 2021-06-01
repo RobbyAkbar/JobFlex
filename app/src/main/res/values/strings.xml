@@ -25,6 +25,7 @@
     <string name="tv_filter">Filter</string>
     <string name="lorem_ipsum">Lorem Ipsum</string>
     <string name="txt_show_more">Show more…</string>
+    <string name="txt_show_less">Show less…</string>
     <string name="job_application_status">Job Application Status</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="upload_cv">Upload CV</string>
@@ -40,4 +41,14 @@
     <string name="malformed_phone_error">This phone number is badly formatted.</string>
     <string name="malformed_email_error">This email address is badly formatted.</string>
     <string name="short_password_error">Password should be at least 6 characters.</string>
+    <string name="message_logout">Are you sure you want to quit?</string>
+    <string name="yes">Yes</string>
+    <string name="no">No</string>
+    <string name="ok">OK</string>
+    <string name="template_date">%1$s - %2$s</string>
+    <string name="txt_description">Description</string>
+    <string name="txt_requirement">Requirement</string>
+    <string name="txt_date">Date</string>
+    <string name="txt_detail">Job Detail</string>
+    <string name="txt_profile">Your Profile</string>
 </resources>

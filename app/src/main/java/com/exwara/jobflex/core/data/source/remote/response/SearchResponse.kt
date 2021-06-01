@@ -4,16 +4,8 @@ import android.os.Parcelable
 import com.google.gson.annotations.SerializedName
 import kotlinx.parcelize.Parcelize
 
-//@Parcelize
-//data class SearchResponse(
-//
-//	@field:SerializedName("SearchResponse")
-//	val searchResponse: List<SearchResponseItem>
-//) : Parcelable
-
 @Parcelize
-data class SearchResponseItem(
-
+data class SearchResponse(
 	@field:SerializedName("StartDate")
 	val startDate: String,
 

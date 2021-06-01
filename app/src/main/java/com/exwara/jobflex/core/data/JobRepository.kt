@@ -2,11 +2,10 @@ package com.exwara.jobflex.core.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData
-import com.dicoding.tourismapp.core.data.Resource
 import com.exwara.jobflex.core.data.source.local.LocalDataSource
 import com.exwara.jobflex.core.data.source.remote.RemoteDataSource
 import com.exwara.jobflex.core.data.source.remote.network.ApiResponse
-import com.exwara.jobflex.core.domain.model.Pdf
+import com.exwara.jobflex.core.domain.model.PdfItem
 import com.exwara.jobflex.core.domain.model.SearchItem
 import com.exwara.jobflex.core.domain.repository.IJobRepository
 import com.exwara.jobflex.core.utils.AppExecutors
@@ -38,17 +37,19 @@ class JobRepository private constructor(
         file: MultipartBody.Part,
         name: RequestBody,
         fileName: String
-    ): LiveData<Resource<Pdf>> {
-        val result = MediatorLiveData<Resource<Pdf>>()
-        val apiResponse =  remoteDataSource.uploadPDF(file, name, fileName)
+    ): LiveData<Resource<PdfItem>> {
+        val result = MediatorLiveData<Resource<PdfItem>>()
+        val apiResponse = remoteDataSource.uploadPDF(file, name, fileName)
         result.value = Resource.Loading(null)
         result.addSource(apiResponse) { response ->
             when (response) {
                 is ApiResponse.Success ->
-                    result.value = Resource.Success(DataMapper.mapPdfResponsesToPdfDomain(response.data))
+                    result.value =
+                        Resource.Success(DataMapper.mapPdfResponsesToPdfDomain(response.data))
                 is ApiResponse.Error -> {
                     result.value = Resource.Error(response.errorMessage, null)
                 }
+                ApiResponse.Empty -> TODO()
             }
         }
         return result
@@ -61,10 +62,28 @@ class JobRepository private constructor(
         result.addSource(apiResponse) { response ->
             when (response) {
                 is ApiResponse.Success ->
-                    result.value = Resource.Success(DataMapper.mapSearchResponsesToSearchDomain(response.data))
-                is ApiResponse.Error -> {
+                    result.value =
+                        Resource.Success(DataMapper.mapSearchResponsesToSearchDomain(response.data))
+                is ApiResponse.Error ->
                     result.value = Resource.Error(response.errorMessage, null)
-                }
+                is ApiResponse.Empty -> TODO()
+            }
+        }
+        return result
+    }
+
+    override fun recommendJob(idUser: RequestBody): LiveData<Resource<List<SearchItem>>> {
+        val result = MediatorLiveData<Resource<List<SearchItem>>>()
+        val apiResponse = remoteDataSource.getRecommendationJob(idUser)
+        result.value = Resource.Loading(null)
+        result.addSource(apiResponse) { response ->
+            when (response) {
+                is ApiResponse.Success ->
+                    result.value =
+                        Resource.Success(DataMapper.mapSearchResponsesToSearchDomain(response.data))
+                is ApiResponse.Error ->
+                    result.value = Resource.Error(response.errorMessage, null)
+                is ApiResponse.Empty -> TODO()
             }
         }
         return result

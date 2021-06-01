@@ -3,6 +3,7 @@ package com.exwara.jobflex.ui.main
 import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
+import android.os.Looper
 import android.view.Menu
 import android.view.MenuItem
 import android.widget.SearchView
@@ -53,7 +54,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun changeToMainFragment(){
-        Navigation.findNavController(this@MainActivity, R.id.fragment_main).navigate(R.id.nav_home)
+        Navigation.findNavController(this@MainActivity, R.id.fragment_main).popBackStack()
     }
 
     override fun onCreateOptionsMenu(menu: Menu): Boolean {
@@ -77,7 +78,7 @@ class MainActivity : AppCompatActivity() {
             this.doubleBackToExitPressedOnce = true
             Toast.makeText(this, "Please click BACK again to exit", Toast.LENGTH_SHORT).show()
 
-            Handler().postDelayed(Runnable { doubleBackToExitPressedOnce = false }, 2000)
+            Handler(Looper.getMainLooper()).postDelayed({ doubleBackToExitPressedOnce = false }, 2000)
         }
     }
 }

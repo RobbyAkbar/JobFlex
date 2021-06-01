@@ -1,4 +1,4 @@
-package com.dicoding.tourismapp.core.di
+package com.exwara.jobflex.core.di
 
 import android.content.Context
 import com.exwara.jobflex.core.data.JobRepository

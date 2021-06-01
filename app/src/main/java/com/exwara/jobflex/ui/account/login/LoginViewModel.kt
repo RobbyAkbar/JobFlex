@@ -8,6 +8,7 @@ import com.exwara.jobflex.R
 import com.exwara.jobflex.core.data.source.local.entity.UserEntity
 import com.exwara.jobflex.core.utils.FirestoreUtil
 import com.exwara.jobflex.core.utils.MyApplication
+import com.exwara.jobflex.core.utils.Preferences
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 
@@ -71,16 +72,16 @@ class LoginViewModel(private val myApplication: Application) : AndroidViewModel(
             val userInfo = it.toObject(UserEntity::class.java)
             MyApplication.currentUser = userInfo
             MyApplication.currentUser!!.active = true
-            FirestoreUtil.updateUser(MyApplication.currentUser!!) {
-
-            }
+            FirestoreUtil.updateUser(MyApplication.currentUser!!) {}
             onFinishLoading()
+            if (userInfo != null) {
+                Preferences().saveDataUser(myApplication, userInfo)
+            }
             startHomeNavigation()
         }.addOnFailureListener {
             onFinishLoading()
             _errorString.value = it.message
         }
-
     }
 
     private fun startHomeNavigation() {

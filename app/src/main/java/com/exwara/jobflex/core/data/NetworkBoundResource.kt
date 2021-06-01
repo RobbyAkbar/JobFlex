@@ -1,4 +1,4 @@
-package com.dicoding.tourismapp.core.data
+package com.exwara.jobflex.core.data
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MediatorLiveData

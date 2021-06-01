@@ -66,6 +66,7 @@
             tools:listitem="@layout/item_row_qualification" />
 
         <androidx.appcompat.widget.AppCompatButton
+            android:id="@+id/btn_apply"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_below="@id/rv_qualification"

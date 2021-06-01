@@ -7,11 +7,12 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.exwara.jobflex.R
 import com.exwara.jobflex.core.domain.model.SearchItem
+import com.exwara.jobflex.core.utils.AppUtils
 import com.exwara.jobflex.databinding.ItemRowResultJobBinding
 import com.exwara.jobflex.ui.detail.DetailActivity
 import java.util.*
 
-class SearchJobAdapter: RecyclerView.Adapter<SearchJobAdapter.ListViewHolder>() {
+class SearchJobAdapter : RecyclerView.Adapter<SearchJobAdapter.ListViewHolder>() {
     private var listData = ArrayList<SearchItem>()
 
     fun setData(newListData: List<SearchItem>?) {
@@ -26,13 +27,18 @@ class SearchJobAdapter: RecyclerView.Adapter<SearchJobAdapter.ListViewHolder>() 
         fun bind(data: SearchItem) {
             with(binding) {
                 tvItemTitle.text = data.title
+                tvItemTitle.isSelected = true
                 tvItemCity.text = data.city
-                tvItemEnddate.text = data.endDate
+                tvItemEnddate.text =
+                    root.context.getString(
+                        R.string.template_date,
+                        AppUtils().formatDate(data.startDate),
+                        AppUtils().formatDate(data.endDate)
+                    )
 
-                itemView.setOnClickListener{
-                    // pindahkan ke detail sambil bawa data nya
+                itemView.setOnClickListener {
                     val intent = Intent(root.context, DetailActivity::class.java)
-//                    intent.putExtra(DetailActivity.EXTRA_DATA, selectedData)
+                    intent.putExtra(DetailActivity.EXTRA_DATA, data)
                     root.context.startActivity(intent)
                 }
             }
@@ -41,7 +47,9 @@ class SearchJobAdapter: RecyclerView.Adapter<SearchJobAdapter.ListViewHolder>() 
     }
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): ListViewHolder {
-        return ListViewHolder(LayoutInflater.from(parent.context).inflate(R.layout.item_row_result_job, parent, false))
+        return ListViewHolder(
+            LayoutInflater.from(parent.context).inflate(R.layout.item_row_result_job, parent, false)
+        )
     }
 
     override fun onBindViewHolder(holder: ListViewHolder, position: Int) {
@@ -49,5 +57,5 @@ class SearchJobAdapter: RecyclerView.Adapter<SearchJobAdapter.ListViewHolder>() 
         holder.bind(data)
     }
 
-    override fun getItemCount()= listData.size
+    override fun getItemCount() = listData.size
 }

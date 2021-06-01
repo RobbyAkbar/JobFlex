@@ -7,6 +7,7 @@ data class UserEntity(
     var userID: String = "",
     var fullName: String = "",
     var email: String = "",
+    var phoneNumber: String = "",
     var profile_pic: String = "",
     var city: String = "",
     var degree_type: String = "",

@@ -6,14 +6,24 @@ import android.os.Looper
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.fragment.app.Fragment
+import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.viewpager2.widget.CompositePageTransformer
 import androidx.viewpager2.widget.MarginPageTransformer
 import androidx.viewpager2.widget.ViewPager2
+import com.exwara.jobflex.R
+import com.exwara.jobflex.core.data.Resource
+import com.exwara.jobflex.core.ui.ViewModelFactory
 import com.exwara.jobflex.databinding.FragmentHomeBinding
 import com.exwara.jobflex.core.utils.DataDummy
+import com.exwara.jobflex.core.utils.Preferences
+import okhttp3.MediaType.Companion.toMediaTypeOrNull
+import okhttp3.RequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
+import org.json.JSONObject
 import kotlin.math.abs
 
 class HomeFragment : Fragment() {
@@ -21,8 +31,11 @@ class HomeFragment : Fragment() {
     private var _binding: FragmentHomeBinding? = null
     private val binding get() = _binding
 
+    private lateinit var homeViewModel: HomeViewModel
     private lateinit var sliderAdapter: SliderAdapter
     private lateinit var jobAdapter: JobAdapter
+    private var listSize: Int = 0
+    private var expand: Boolean = false
 
     private val sliderHandler = Handler(Looper.getMainLooper())
 
@@ -39,6 +52,8 @@ class HomeFragment : Fragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         if (activity != null) {
+            val factory = ViewModelFactory.getInstance(requireActivity())
+            homeViewModel = ViewModelProvider(this, factory)[HomeViewModel::class.java]
             sliderAdapter = SliderAdapter()
             jobAdapter = JobAdapter()
 
@@ -68,10 +83,24 @@ class HomeFragment : Fragment() {
                     setHasFixedSize(true)
                     adapter = jobAdapter
                 }
+
+                tvShowMore.setOnClickListener {
+                    if (expand) {
+                        tvShowMore.text = getString(R.string.txt_show_more)
+                        jobAdapter.itemSize = 3
+                        jobAdapter.notifyDataSetChanged()
+                        expand = false
+                    } else {
+                        tvShowMore.text = getString(R.string.txt_show_less)
+                        jobAdapter.itemSize = listSize
+                        jobAdapter.notifyDataSetChanged()
+                        expand = true
+                    }
+                }
             }
 
             sliderAdapter.listItems = DataDummy.generateDummySlider()
-            jobAdapter.updateWith(DataDummy.generateDummyJobs(), 3)
+            getRecommendationJob()
         }
     }
 
@@ -91,6 +120,37 @@ class HomeFragment : Fragment() {
     override fun onResume() {
         super.onResume()
         sliderHandler.postDelayed(sliderRunnable, 3000)
+    }
+
+    private fun getRecommendationJob(){
+        val jsonObject = JSONObject()
+        jsonObject.put("id", Preferences().getUserId(requireContext()))
+        val jsonObjectString = jsonObject.toString()
+
+        val requestBody: RequestBody = jsonObjectString.toRequestBody("application/json".toMediaTypeOrNull())
+        homeViewModel.recommendedJob(requestBody).observe(viewLifecycleOwner,
+            {res->
+                if (res != null) {
+                    when (res) {
+                        is Resource.Loading -> {
+                            binding?.progressBar?.visibility = View.VISIBLE
+                        }
+                        is Resource.Success -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            binding?.tvShowMore?.visibility = View.VISIBLE
+                            res.data?.let {
+                                jobAdapter.updateWith(it, 3)
+                                listSize = it.size
+                            }
+                            Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
+                        }
+                        is Resource.Error -> {
+                            binding?.progressBar?.visibility = View.GONE
+                            Toast.makeText(requireContext(), "error", Toast.LENGTH_SHORT).show()
+                        }
+                    }
+                }
+            })
     }
 
 }

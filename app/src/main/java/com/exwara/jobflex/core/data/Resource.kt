@@ -1,4 +1,4 @@
-package com.dicoding.tourismapp.core.data
+package com.exwara.jobflex.core.data
 
 sealed class Resource<T>(val data: T? = null, val message: String? = null) {
     class Success<T>(data: T) : Resource<T>(data)

@@ -18,14 +18,16 @@ import androidx.annotation.RequiresApi
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.tourismapp.core.data.Resource
+import com.exwara.jobflex.core.data.Resource
 import com.exwara.jobflex.core.ui.ViewModelFactory
+import com.exwara.jobflex.core.utils.Preferences
 import com.exwara.jobflex.databinding.ActivityUploadPdfBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
 import java.io.*
+import java.nio.file.Files
 
 class UploadPdfActivity : AppCompatActivity() {
 
@@ -93,7 +95,7 @@ class UploadPdfActivity : AppCompatActivity() {
             val pdfName: String? = columnIndex?.let { cursor.getString(it) }
             binding.tvPdfname.text = pdfName
 
-            cursor?.close();
+            cursor?.close()
 
             if (path != null) {
                 uploadPdf(path)
@@ -134,10 +136,16 @@ class UploadPdfActivity : AppCompatActivity() {
         //Create a file object using file path
         val file = File(path)
         // Parsing any Media type file
-        val requestBody: RequestBody = file.asRequestBody("multipart/form-data".toMediaTypeOrNull())
-        val fileToUpload: MultipartBody.Part = MultipartBody.Part.createFormData("filename", file.name, requestBody)
+        val requestBody: RequestBody = file.asRequestBody("application/pdf".toMediaTypeOrNull())
 
-        uploadPdfViewModel.uploadPdf(fileToUpload, requestBody, "cvtest1.pdf").observe(this,
+        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            Files.readAllBytes(file.toPath())
+        }*/
+
+        val fileToUpload: MultipartBody.Part = MultipartBody.Part.createFormData("filename", file.name, requestBody)
+        val userId = Preferences().getUserId(this)
+
+        uploadPdfViewModel.uploadPdf(fileToUpload, requestBody, "$userId.pdf").observe(this,
             {res->
                 if (res != null) {
                     when (res) {

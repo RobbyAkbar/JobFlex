@@ -3,8 +3,9 @@ package com.exwara.jobflex.core.ui
 import android.content.Context
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.dicoding.tourismapp.core.di.Injection
+import com.exwara.jobflex.core.di.Injection
 import com.exwara.jobflex.core.domain.usecase.IJobUseCase
+import com.exwara.jobflex.ui.home.HomeViewModel
 import com.exwara.jobflex.ui.main.MainActivityViewModel
 import com.exwara.jobflex.ui.profile.ProfileViewModel
 import com.exwara.jobflex.ui.profile.UploadPdfViewModel
@@ -39,6 +40,9 @@ class ViewModelFactory private constructor(private val jobUseCase: IJobUseCase) 
             }
             modelClass.isAssignableFrom(MainActivityViewModel::class.java) -> {
                 MainActivityViewModel(jobUseCase) as T
+            }
+            modelClass.isAssignableFrom(HomeViewModel::class.java) -> {
+                HomeViewModel(jobUseCase) as T
             }
             else -> throw Throwable("Unknown ViewModel class: " + modelClass.name)
         }
