@@ -1,5 +1,6 @@
 package com.exwara.jobflex.ui.home
 
+import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.os.Looper
@@ -20,6 +21,7 @@ import com.exwara.jobflex.core.ui.ViewModelFactory
 import com.exwara.jobflex.databinding.FragmentHomeBinding
 import com.exwara.jobflex.core.utils.DataDummy
 import com.exwara.jobflex.core.utils.Preferences
+import com.exwara.jobflex.ui.profile.UploadPdfActivity
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.toRequestBody
@@ -97,6 +99,11 @@ class HomeFragment : Fragment() {
                         expand = true
                     }
                 }
+
+                btnUpload.setOnClickListener {
+                    val intent = Intent(requireContext(), UploadPdfActivity::class.java)
+                    startActivity(intent)
+                }
             }
 
             sliderAdapter.listItems = DataDummy.generateDummySlider()
@@ -119,6 +126,7 @@ class HomeFragment : Fragment() {
 
     override fun onResume() {
         super.onResume()
+        if (listSize == 0) getRecommendationJob()
         sliderHandler.postDelayed(sliderRunnable, 3000)
     }
 
@@ -137,10 +145,15 @@ class HomeFragment : Fragment() {
                         }
                         is Resource.Success -> {
                             binding?.progressBar?.visibility = View.GONE
-                            binding?.tvShowMore?.visibility = View.VISIBLE
                             res.data?.let {
-                                jobAdapter.updateWith(it, 3)
-                                listSize = it.size
+                                if (it.isEmpty()) {
+                                    binding?.btnUpload?.visibility = View.VISIBLE
+                                } else {
+                                    jobAdapter.updateWith(it, 3)
+                                    listSize = it.size
+                                    binding?.tvShowMore?.visibility = View.VISIBLE
+                                    binding?.btnUpload?.visibility = View.GONE
+                                }
                             }
                             Toast.makeText(requireContext(), "success", Toast.LENGTH_SHORT).show()
                         }

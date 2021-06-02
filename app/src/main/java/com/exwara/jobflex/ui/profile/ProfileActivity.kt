@@ -42,7 +42,9 @@ class ProfileActivity : AppCompatActivity() {
             .setCancelable(false)
             .setPositiveButton(getString(R.string.yes)) { _, _ ->
                 Preferences().deletePref(this)
-                startActivity(Intent(this, AccountActivity::class.java))
+                val intent = Intent(this, AccountActivity::class.java)
+                intent.addFlags(Intent.FLAG_ACTIVITY_CLEAR_TOP or Intent.FLAG_ACTIVITY_SINGLE_TOP)
+                startActivity(intent)
                 finish()
             }
             .setNegativeButton(

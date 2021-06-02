@@ -1,17 +1,13 @@
 package com.exwara.jobflex.ui.profile
 
 import android.Manifest
-import android.content.Context
 import android.content.Intent
 import android.content.pm.PackageManager
 import android.database.Cursor
 import android.net.Uri
 import android.os.Build
 import android.os.Bundle
-import android.os.Environment
 import android.provider.OpenableColumns
-import android.text.TextUtils
-import android.util.Log
 import android.view.View
 import android.widget.Toast
 import androidx.annotation.RequiresApi
@@ -20,12 +16,14 @@ import androidx.core.app.ActivityCompat
 import androidx.lifecycle.ViewModelProvider
 import com.exwara.jobflex.core.data.Resource
 import com.exwara.jobflex.core.ui.ViewModelFactory
+import com.exwara.jobflex.core.utils.FileUtils
 import com.exwara.jobflex.core.utils.Preferences
 import com.exwara.jobflex.databinding.ActivityUploadPdfBinding
 import okhttp3.MediaType.Companion.toMediaTypeOrNull
 import okhttp3.MultipartBody
 import okhttp3.RequestBody
 import okhttp3.RequestBody.Companion.asRequestBody
+import okhttp3.RequestBody.Companion.toRequestBody
 import java.io.*
 import java.nio.file.Files
 
@@ -34,13 +32,13 @@ class UploadPdfActivity : AppCompatActivity() {
     private lateinit var binding: ActivityUploadPdfBinding
     private lateinit var uploadPdfViewModel: UploadPdfViewModel
 
-    private val REQUEST_EXTERNAL_STORAGE = 1
-    private val PERMISSIONS_STORAGE = arrayOf(
-        Manifest.permission.READ_EXTERNAL_STORAGE,
-        Manifest.permission.WRITE_EXTERNAL_STORAGE
-    )
-
-    private val BUFFER_SIZE = 1024 * 2
+    companion object {
+        private const val REQUEST_EXTERNAL_STORAGE = 1
+        private val PERMISSIONS_STORAGE = arrayOf(
+            Manifest.permission.READ_EXTERNAL_STORAGE,
+            Manifest.permission.WRITE_EXTERNAL_STORAGE
+        )
+    }
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -81,11 +79,7 @@ class UploadPdfActivity : AppCompatActivity() {
         if(requestCode == 1 && resultCode == RESULT_OK && data !== null){
             val uri: Uri? = data.data
 
-            var path: String?
-            path = getFilePathFromURI(applicationContext, uri)
-            if (path != null) {
-                if (path.contains("msf:")) path = FilePath.getPath(applicationContext, uri)
-            }
+            val path: String? = uri?.let { FileUtils(this).getPath(it) }
 
             val cursor: Cursor? =
                 uri?.let { contentResolver.query(it, null, null, null, null) }
@@ -136,11 +130,15 @@ class UploadPdfActivity : AppCompatActivity() {
         //Create a file object using file path
         val file = File(path)
         // Parsing any Media type file
-        val requestBody: RequestBody = file.asRequestBody("application/pdf".toMediaTypeOrNull())
+        var requestBody: RequestBody = file.asRequestBody("application/pdf".toMediaTypeOrNull())
 
-        /*if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
-            Files.readAllBytes(file.toPath())
-        }*/
+
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+            requestBody = Files.readAllBytes(file.toPath())
+                .toRequestBody("application/octet-stream".toMediaTypeOrNull(), 0,
+                    file.length().toInt()
+                )
+        }
 
         val fileToUpload: MultipartBody.Part = MultipartBody.Part.createFormData("filename", file.name, requestBody)
         val userId = Preferences().getUserId(this)
@@ -163,78 +161,5 @@ class UploadPdfActivity : AppCompatActivity() {
                     }
                 }
             })
-    }
-
-    fun getFilePathFromURI(context: Context, contentUri: Uri?): String? {
-        //copy file and send new file path
-        val fileName: String? = getFileName(contentUri)
-        val wallpaperDirectory = File(
-            Environment.getExternalStorageState(), "file"
-        )
-        // have the object build the directory structure, if needed.
-        if (!wallpaperDirectory.exists()) {
-            wallpaperDirectory.mkdirs()
-        }
-        if (!TextUtils.isEmpty(fileName)) {
-            val copyFile = File(wallpaperDirectory.toString() + File.separator + fileName)
-            // create folder if not exists
-            copy(context, contentUri, copyFile)
-            return copyFile.absolutePath
-        }
-        return null
-    }
-
-    private fun getFileName(uri: Uri?): String? {
-        if (uri == null) return null
-        var fileName: String? = null
-        val path = uri.path
-        val cut = path!!.lastIndexOf('/')
-        if (cut != -1) {
-            fileName = path.substring(cut + 1)
-        }
-        return fileName
-    }
-
-    fun copy(context: Context, srcUri: Uri?, dstFile: File?) {
-        try {
-            val inputStream = context.contentResolver.openInputStream(srcUri!!)
-                ?: return
-            val outputStream: OutputStream = FileOutputStream(dstFile)
-            copystream(inputStream, outputStream)
-            inputStream.close()
-            outputStream.close()
-        } catch (e: IOException) {
-            e.printStackTrace()
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-    }
-
-    @Throws(Exception::class, IOException::class)
-    fun copystream(input: InputStream?, output: OutputStream?): Int {
-        val buffer = ByteArray(BUFFER_SIZE)
-        val `in` = BufferedInputStream(input, BUFFER_SIZE)
-        val out = BufferedOutputStream(output, BUFFER_SIZE)
-        var count = 0
-        var n = 0
-        try {
-            while (`in`.read(buffer, 0, BUFFER_SIZE).also { n = it } != -1) {
-                out.write(buffer, 0, n)
-                count += n
-            }
-            out.flush()
-        } finally {
-            try {
-                out.close()
-            } catch (e: IOException) {
-                Log.e(e.message, java.lang.String.valueOf(e))
-            }
-            try {
-                `in`.close()
-            } catch (e: IOException) {
-                Log.e(e.message, java.lang.String.valueOf(e))
-            }
-        }
-        return count
     }
 }
