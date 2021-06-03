@@ -19,10 +19,10 @@ import os
 from sklearn.preprocessing import LabelBinarizer
 
 # Load labels
-filename = '/home/train_labels.csv'
+filename = 'train_labels.csv'
 data = pd.read_csv(filename, header=0, names=['Query'])
 
-filename2 = '/home/train_descs.csv'
+filename2 = 'train_descs.csv'
 data2 = pd.read_csv(filename2, header = 0, names = ['Description'])
 
 # Initialize tokenizer
@@ -30,7 +30,7 @@ tokenizer = Tokenizer(num_words = 3000)
 tokenizer.fit_on_texts(data2['Description'])
 
 #Load Model
-model = tf.keras.models.load_model('/home/saved_model')
+model = tf.keras.models.load_model('../saved_model')
 predicted = model.predict(token_list, verbose = 0)
 
 app = flask.Flask(__name__)
