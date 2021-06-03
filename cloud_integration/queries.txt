@@ -1,0 +1,27 @@
+#QUERY FOR SEARCHING JOBS
+SELECT * 
+FROM `b21-cap0139-jobflex.jobsData.main_jobs_data` 
+WHERE LOWER(Title) LIKE "%<JOB_NAME_SYL_1>%"
+OR LOWER(Title) LIKE "%<JOB_NAME_SYL_2>%"
+.
+.
+.
+OR LOWER(Title) LIKE "%<JOB_NAME_SYL_N>%"
+LIMIT 10
+
+#QUERY FOR EXTRACTING SAVED RECOMMENDATION FOR USER BY USER ID
+SELECT
+    JSON_EXTRACT_SCALAR(h,'$.JobID') as JobID,
+    JSON_EXTRACT_SCALAR(h,'$.WindowID') as WindowID,
+    JSON_EXTRACT_SCALAR(h,'$.Title') as Title,
+    JSON_EXTRACT_SCALAR(h,'$.Description') as Description,
+    JSON_EXTRACT_SCALAR(h,'$.Requirements') as Requirements,
+    JSON_EXTRACT_SCALAR(h,'$.City') as City,
+    JSON_EXTRACT_SCALAR(h,'$.State') as State,
+    JSON_EXTRACT_SCALAR(h,'$.Country') as Country,
+    JSON_EXTRACT_SCALAR(h,'$.Zip5') as Zip5,
+    JSON_EXTRACT_SCALAR(h,'$.StartDate') as StartDate,
+    JSON_EXTRACT_SCALAR(h,'$.EndDate') as EndDate
+FROM `b21-cap0139-jobflex.jobsData.results_data`
+LEFT join unnest(json_extract_array(recommendation)) as h
+WHERE id LIKE "<USER_ID>"
