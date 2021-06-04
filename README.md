@@ -21,8 +21,19 @@
   </p>
 </p>
 
+<!-- TEAM MEMBERS -->
+<h4>Team Members</h4>
+<ul>
+  <li>Rama Febriansyah - A2001981</li>
+  <li>Robby Akbar - A2992725</li>
+  <li>Kevin Marhan Cunis - C0020087</li>
+  <li>Rully Nurul Hasanah - C2992709</li>
+  <li>Rafif Rahman Darmawan - M0020073</li>
+  <li>Cynthia Evani - M0020081</li>
+</ul>
+
 <!-- TABLE OF CONTENTS -->
-<details open="open">
+<details>
   <summary>Table of Contents</summary>
   <ol>
     <li><a href="#background">Background</a></li>
@@ -31,6 +42,8 @@
     <li><a href="#deployment-steps">Deployment Steps</a></li>
   </ol>
 </details>
+
+For **Android App Development** commit history, please kindly check the [master branch](https://github.com/RobbyAkbar/JobFlex/tree/master).
 
 ## Background
 In August 2020, Badan Pusat Statistik (BPS) stated that the level of unemployment in Jakarta is 10.95%, the highest out of all provinces in Indonesia. How can technology help reduce the labor immobility causing high frictional unemployment level in Jakarta, which occurs when a person is searching for or transitioning to a new job but can’t find the related information? Overabundance of job searching platforms makes job seeking difficult for on-the-go job seekers. A good company and employee fit will increase productivity in the capital city, therefore contributing a significant amount in stabilizing or improving Indonesia’s economy.
