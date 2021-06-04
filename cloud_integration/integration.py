@@ -3,10 +3,8 @@ from google.cloud import bigquery
 from google.cloud import storage
 import flask
 from flask import request, jsonify, abort
-import sys
 import json
 
-sys.path.append('/home/m0020081/.local/lib/python3.7/site-packages')
 
 #for ML
 import tensorflow as tf
